@@ -1,0 +1,19 @@
+import numpy as np
+
+# Define the softmax function
+def softmax(logits):
+    """
+    Compute the softmax of a vector of logits.
+    """
+    exp_logits = np.exp(logits - np.max(logits))  # Subtract max for numerical stability
+    probabilities = exp_logits / np.sum(exp_logits)
+    return probabilities
+
+# Example logits
+logits = np.array([2.0, 1.0, 0.1])
+
+# Compute softmax
+probabilities = softmax(logits)
+
+# Print results
+logits, probabilities
