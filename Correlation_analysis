@@ -1,0 +1,70 @@
+# Correlation analysis
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Generate data for different correlations
+x = np.linspace(-10, 10, 500)
+
+# Linear positive correlation
+y_linear_pos = 2 * x + 5
+
+# Linear negative correlation
+y_linear_neg = -1.5 * x + 10
+
+# Non-linear correlation: Parabolic
+y_nonlinear_quad = x**2
+
+# Non-linear correlation: Sinusoidal
+y_nonlinear_sin = np.sin(x)
+
+# Generate data for monotonic non-linear correlation
+y_monotonic_nonlinear = np.log(np.abs(x) + 1) * np.sign(x)
+
+# Update the visualization to include monotonic non-linear correlation
+plt.figure(figsize=(16, 10))
+
+# Plot settings
+#plt.figure(figsize=(12, 8))
+
+# Linear positive correlation
+plt.subplot(2, 3, 1)
+plt.scatter(x, y_linear_pos, alpha=0.7, label='Linear Positive')
+plt.title("Linear Positive Correlation")
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.legend()
+
+# Linear negative correlation
+plt.subplot(2, 3, 2)
+plt.scatter(x, y_linear_neg, alpha=0.7, label='Linear Negative', color='orange')
+plt.title("Linear Negative Correlation")
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.legend()
+
+# Non-linear correlation: Parabolic
+plt.subplot(2, 3, 3)
+plt.scatter(x, y_nonlinear_quad, alpha=0.7, label='Non-Linear (Parabolic)', color='green')
+plt.title("Non-Linear Correlation (Parabolic)")
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.legend()
+
+# Non-linear correlation: Sinusoidal
+plt.subplot(2, 3, 4)
+plt.scatter(x, y_nonlinear_sin, alpha=0.7, label='Non-Linear (Sinusoidal)', color='red')
+plt.title("Non-Linear Correlation (Sinusoidal)")
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.legend()
+
+# Monotonic non-linear correlation
+plt.subplot(2, 3,5)
+plt.scatter(x, y_monotonic_nonlinear, alpha=0.7, label='Monotonic Non-Linear', color='purple')
+plt.title("Monotonic Non-Linear Correlation")
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.legend()
+
+plt.tight_layout()
+plt.show()
