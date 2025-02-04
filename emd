@@ -1,0 +1,11 @@
+from scipy.stats import wasserstein_distance
+
+# Define two example probability distributions (histograms)
+P = [0.2, 0.3, 0.5]  # Source distribution
+Q = [0.1, 0.4, 0.5]  # Target distribution
+
+# Compute Earth Mover's Distance (Wasserstein Distance)
+emd_value = wasserstein_distance(P, Q)
+
+# Display result
+emd_value
