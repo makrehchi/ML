@@ -1,0 +1,25 @@
+import zlib
+
+def compressed_size(data: str) -> int:
+    """Returns the compressed size of a string using zlib."""
+    return len(zlib.compress(data.encode()))
+
+def normalized_compression_distance(x: str, y: str) -> float:
+    """Computes the Normalized Compression Distance (NCD) between two strings."""
+    C_x = compressed_size(x)
+    C_y = compressed_size(y)
+    C_xy = compressed_size(x + y)
+
+    # Compute NCD using the formula
+    NCD_value = (C_xy - min(C_x, C_y)) / max(C_x, C_y)
+    return NCD_value
+
+# Example strings for testing
+string1 = "machine learning is fun"
+string2 = "machine learning is exciting"
+
+# Compute NCD
+ncd_result = normalized_compression_distance(string1, string2)
+
+# Display result
+ncd_result
