@@ -1,0 +1,44 @@
+# Import necessary libraries
+import numpy as np
+import pandas as pd
+import scipy.spatial.distance as dist
+
+# Define example points for continuous and categorical data
+x = np.array([1, 2])
+y = np.array([4, 6])
+
+# Example binary vectors for categorical distances
+x_bin = np.array([1, 0, 1, 1])
+y_bin = np.array([1, 1, 0, 1])
+
+# Example probability distributions for KL divergence and Earth Mover’s Distance (EMD)
+p = np.array([0.2, 0.3, 0.5])
+q = np.array([0.1, 0.4, 0.5])
+
+# Create a valid covariance matrix for Mahalanobis distance
+X_sample = np.array([[1, 2], [4, 6], [3, 5]])  # Small dataset for covariance estimation
+cov_matrix = np.cov(X_sample.T)  # Covariance matrix
+cov_inv = np.linalg.pinv(cov_matrix)  # Pseudo-inverse to avoid singularity
+
+# Compute various distances
+distances_corrected = {
+    "Euclidean Distance": np.linalg.norm(x - y),  # Standard Euclidean distance
+    "Manhattan Distance": np.sum(np.abs(x - y)),  # L1 norm
+    "Minkowski Distance (p=3)": dist.minkowski(x, y, 3),  # Generalized Minkowski distance with p=3
+    "Chebyshev Distance": dist.chebyshev(x, y),  # Maximum coordinate difference
+    "Cosine Distance": dist.cosine(x, y),  # Angle-based similarity measure
+    "Hamming Distance": dist.hamming(x_bin, y_bin),  # Used for categorical data
+    "Jaccard Distance": dist.jaccard(x_bin, y_bin),  # Measures dissimilarity for binary data
+    "Mahalanobis Distance": dist.mahalanobis(x, y, cov_inv),  # Accounts for correlations in data
+    "Earth Mover’s Distance": "Requires probability distributions",  # More complex, not computed here
+    "KL Divergence": np.sum(p * np.log(p / q)) if np.all(q > 0) else "Undefined (q contains zero)",  # Measures divergence between distributions
+}
+
+# Convert to DataFrame for better visualization
+df_distances_corrected = pd.DataFrame(list(distances_corrected.items()), columns=["Distance Measure", "Example Calculation"])
+
+# Save the results to a CSV file and display as a table
+df_distances_corrected.to_csv("distance_measures.csv", index=False)
+
+# Print the table to the console
+print(df_distances_corrected)
