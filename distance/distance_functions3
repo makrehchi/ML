@@ -1,0 +1,43 @@
+# Re-import necessary libraries after execution state reset
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Define two example points in 2D space
+x = np.array([1, 2])
+y = np.array([4, 6])
+
+# Create a figure for visualization
+fig, axes = plt.subplots(2, 3, figsize=(15, 10))
+fig.suptitle("Visual Representation of Different Distance Measures", fontsize=16)
+
+# Euclidean Distance (Straight-line distance)
+axes[0, 0].plot([x[0], y[0]], [x[1], y[1]], 'ro-', label="Euclidean Path")
+axes[0, 0].set_title("Euclidean Distance")
+axes[0, 0].legend()
+
+# Manhattan Distance (L1 norm, grid-like path)
+axes[0, 1].plot([x[0], x[0]], [x[1], y[1]], 'bo--', label="Step 1")
+axes[0, 1].plot([x[0], y[0]], [y[1], y[1]], 'bo--', label="Step 2")
+axes[0, 1].set_title("Manhattan Distance")
+axes[0, 1].legend()
+
+# Minkowski Distance (p=3, generalization of Euclidean and Manhattan)
+axes[0, 2].plot([x[0], y[0]], [x[1], y[1]], 'go-', label="Minkowski (p=3)")
+axes[0, 2].set_title("Minkowski Distance")
+axes[0, 2].legend()
+
+# Chebyshev Distance (Max coordinate difference)
+axes[1, 0].bar(["X Difference", "Y Difference"], [abs(x[0] - y[0]), abs(x[1] - y[1])], color='purple')
+axes[1, 0].set_title("Chebyshev Distance")
+
+# Cosine Distance (Angle between vectors)
+cosine_angle = np.dot(x, y) / (np.linalg.norm(x) * np.linalg.norm(y))
+axes[1, 1].bar(["Cosine Similarity"], [1 - cosine_angle], color='orange')
+axes[1, 1].set_title("Cosine Distance")
+
+# Hamming Distance (Binary difference)
+axes[1, 2].bar(["Bit 1", "Bit 2", "Bit 3"], [1, 0, 1], color='red')
+axes[1, 2].set_title("Hamming Distance")
+
+plt.tight_layout(rect=[0, 0, 1, 0.96])
+plt.show()
