@@ -1,0 +1,17 @@
+from scipy.stats import wasserstein_distance
+
+# Define two example probability distributions for Earth Mover’s Distance (EMD)
+P_earth = np.array([0.1, 0.2, 0.7])
+Q_earth = np.array([0.3, 0.3, 0.4])
+
+# Compute Earth Mover’s Distance (Wasserstein Distance)
+emd_value = wasserstein_distance(P_earth, Q_earth)
+
+# Create visualization for Earth Mover's Distance
+fig, ax = plt.subplots(figsize=(8, 5))
+ax.bar(["P1", "P2", "P3"], P_earth, alpha=0.6, label="Distribution P", color="blue")
+ax.bar(["P1", "P2", "P3"], Q_earth, alpha=0.6, label="Distribution Q", color="red")
+ax.set_title(f"Earth Mover’s Distance (Wasserstein Distance)\nValue: {emd_value:.3f}")
+ax.legend()
+
+plt.show()
